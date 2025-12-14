@@ -52,3 +52,5 @@ Notes:
 */
 
 select result_value, result_id, sample_id from results
+join samples
+join batches
