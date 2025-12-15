@@ -60,3 +60,6 @@ join batches b on s.batch_id = b.batch_id;  /* ";" only at the end of a statemen
 
 /*Part 2: Filtering */
 
+where b.product_code = 'P001' 
+and r.result_status = 'approved'
+and r.test_name = 'assay';
