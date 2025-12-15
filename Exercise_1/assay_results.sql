@@ -51,6 +51,12 @@ Notes:
 ====================================================
 */
 
-select result_value, result_id, sample_id from results
-join samples
-join batches
+/*Part 1: SELECT and JOIN */
+
+select r.result_value, r.result_id, s.sample_id, b.batch_id from results r /* "Aliases (s. r. etc) are a best praxis */
+
+join samples s on r.sample_id = s.sample_id
+join batches b on s.batch_id = b.batch_id;  /* ";" only at the end of a statement */
+
+/*Part 2: Filtering */
+
