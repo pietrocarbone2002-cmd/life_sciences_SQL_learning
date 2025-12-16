@@ -58,8 +58,15 @@ select r.result_value, r.result_id, s.sample_id, b.batch_id from results r /* "A
 join samples s on r.sample_id = s.sample_id
 join batches b on s.batch_id = b.batch_id;  /* ";" only at the end of a statement */
 
-/*Part 2: Filtering */
+/*Part 2: Filtering and Order chronologically */
 
-where b.product_code = 'P001' 
+where b.product_code = 'P001'    /* "" are not standard. '' are preferred! */
 and r.result_status = 'approved'
-and r.test_name = 'assay';
+and r.test_name = 'assay'
+order by s.sample_time;
+
+/* Part 3: Select relevant columns */
+
+select b.batch_id, s.sample_id, s.sample_time, r.test_name, r.result_value, r.result_unit
+
+/* Part 3 is a compensation to Part 1. An SQL File has only ONE select */
