@@ -55,3 +55,8 @@ Notes:
 ====================================================
 */
 
+select b.batch_id, s.sample_id, s.sample_time, r.test_name, r.result_value, r.result_unit from results r
+join samples s on r.sample_id = s.sample_id
+join batches b on s.batch_id = b.batch_id ; 
+
+where r.result_status = 'approved'

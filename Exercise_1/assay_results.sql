@@ -53,7 +53,8 @@ Notes:
 
 /*Part 1: SELECT and JOIN */
 
-select r.result_value, r.result_id, s.sample_id, b.batch_id from results r /* "Aliases (s. r. etc) are a best praxis */
+select r.result_value, r.result_id, s.sample_id, b.batch_id /* "Aliases (s. r. etc) are a best praxis */
+from results r /* Allias is created after FROM. from r.results would be therefore incorrect */
 
 join samples s on r.sample_id = s.sample_id
 join batches b on s.batch_id = b.batch_id;  /* ";" only at the end of a statement */
