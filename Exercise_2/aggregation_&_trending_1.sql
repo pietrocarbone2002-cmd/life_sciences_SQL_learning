@@ -55,8 +55,16 @@ Notes:
 ====================================================
 */
 
-select b.batch_id, s.sample_id, s.sample_time, r.test_name, r.result_value, r.result_unit from results r
+select b.batch_id, 
+count(r.result_value) as n_results,       /* Every key figure needs an explicit name */
+avg(r.result_value) as avg_result_value,
+min(r.result_value) as min_result_value, 
+max(r.result_value) as max_result_value 
+from results r
+
 join samples s on r.sample_id = s.sample_id
-join batches b on s.batch_id = b.batch_id ; 
+join batches b on s.batch_id = b.batch_id
 
 where r.result_status = 'approved'
+group by b.batch_id; /* tells SQL to collapse all approved result rows belonging to the same batch into one batch-level row, 
+                        and to compute the aggregate statistics per batch instead of per result */
