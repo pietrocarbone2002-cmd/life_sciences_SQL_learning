@@ -49,3 +49,16 @@ Notes:
   - across campaigns
 ====================================================
 */
+
+select b.batch_id, 
+count(r.result_value) as n_results,     
+avg(r.result_value) as avg_result_value,
+min(r.result_value) as min_result_value, 
+max(r.result_value) as max_result_value 
+from results r
+
+join samples s on r.sample_id = s.sample_id
+join batches b on s.batch_id = b.batch_id
+
+where r.result_status = 'approved'
+group by b.batch_id;
