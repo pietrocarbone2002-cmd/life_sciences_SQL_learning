@@ -50,7 +50,7 @@ Notes:
 ====================================================
 */
 
-select b.batch_id, 
+select b.batch_id, b.manufacture_date, /* b.manufacture_date allows trending */
 count(r.result_value) as n_results,     
 avg(r.result_value) as avg_result_value,
 min(r.result_value) as min_result_value, 
@@ -61,4 +61,5 @@ join samples s on r.sample_id = s.sample_id
 join batches b on s.batch_id = b.batch_id
 
 where r.result_status = 'approved'
-group by b.batch_id;
+group by b.batch_id, b.manufacture_date
+order by b.manufacture_date; /* chronological order */
